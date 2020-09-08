@@ -1,6 +1,11 @@
 import sys, os
-sys.path.insert(0, 'evoman_framework/evoman')
+sys.path.insert(0, 'evoman')
 from environment import Environment
+# from demo_controller import player_controller
+# from controller import Controller
+from test_controller import test_controller
+
+import numpy as np
 
 
 def init():
@@ -12,8 +17,15 @@ def init():
     if not os.path.exists(experiment_name):
         os.makedirs(experiment_name)
 
+    n_hidden_neurons = 0
+
     # init environment class
-    env = Environment(experiment_name=experiment_name)
+    # cont = Controller()
+
+    env = Environment(experiment_name=experiment_name,
+                        speed='normal')
+
+    env.player_controller = test_controller
 
     return env
 
@@ -29,3 +41,6 @@ if __name__ == '__main__':
     # TODO:
 
     env.play()
+    yeet = env.player.sensors.get(env)
+    print(yeet)
+    print(env.logs)
